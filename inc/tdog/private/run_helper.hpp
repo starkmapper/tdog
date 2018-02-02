@@ -168,7 +168,7 @@ class run_helper
   void printf(const std::string& s, tdog::i64_t val, int lnum);
   void printf(const std::string& s, tdog::u64_t val, int lnum);
   void printf(const std::string& s, double val, int lnum);
-  void printf(const std::string& s, const char* val, int lnum);
+  void printf(const std::string& s, const char* const val, int lnum);
   void printf(const std::string& s, const wchar_t* val, int lnum);
   void printf(const std::string& s, char* val, int lnum);
   void printf(const std::string& s, wchar_t* val, int lnum);
