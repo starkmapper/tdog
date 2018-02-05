@@ -486,9 +486,9 @@
 #else
   #define TDOG_SUITE(suite_name) \
   namespace suite_name { \
-    namespace TDOG_CONCAT(tdog_suite, TDOG_COUNTER_ID) { \
+    namespace { namespace TDOG_CONCAT(tdog_suite, TDOG_COUNTER_ID) { \
       volatile const tdog::suite_manager open_suite(true, #suite_name, true); \
-    } \
+    } }\
   } \
   namespace suite_name
 #endif
@@ -561,9 +561,9 @@
 #else
   #define TDOG_EXPLICIT_SUITE(suite_name) \
   namespace suite_name { \
-    namespace TDOG_CONCAT(tdog_suite, TDOG_COUNTER_ID) { \
+    namespace { namespace TDOG_CONCAT(tdog_suite, TDOG_COUNTER_ID) { \
       volatile const tdog::suite_manager open_suite(true, #suite_name, false); \
-    } \
+    } }\
   } \
   namespace suite_name
 #endif
@@ -599,9 +599,9 @@
   #define TDOG_CLOSE_SUITE
 #else
   #define TDOG_CLOSE_SUITE \
-  namespace TDOG_CONCAT(tdog_suite, TDOG_COUNTER_ID) { \
+  namespace { namespace TDOG_CONCAT(tdog_suite, TDOG_COUNTER_ID) { \
     volatile const tdog::suite_manager close_suite(false); \
-  }
+  } }
 #endif
 
 /**
