@@ -290,7 +290,7 @@
   #define TDOG_TEST_PROTECTED(test_name, user_type)
 #else
   #define TDOG_TEST_PROTECTED(test_name, user_type) \
-  class test_name##_protclass : public tdog::run_interface, public user_type { \
+  class test_name##_protclass : public virtual tdog::run_interface, public user_type { \
   public: \
     typedef user_type USER_TYPE; \
     virtual void tdog_impl(); \
@@ -372,7 +372,7 @@
   #define TDOG_TEST_FIXTURE(test_name, user_type)
 #else
   #define TDOG_TEST_FIXTURE(test_name, user_type) \
-  class test_name##_fixtclass : public tdog::run_interface, public user_type { \
+  class test_name##_fixtclass : public virtual tdog::run_interface, public user_type { \
   public: \
     virtual void tdog_impl(); \
     test_name##_fixtclass(tdog::run_helper* ptr) \
