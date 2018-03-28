@@ -517,7 +517,7 @@ void run_helper::printf(const std::string& s, double val, int lnum)
   _printf_double(s, val, lnum);
 }
 //---------------------------------------------------------------------------
-void run_helper::printf(const std::string& s, const char* const val, int lnum)
+void run_helper::printf(const std::string& s, const char * val, int lnum)
 {
   if (val == 0) _printf_str(s, "<nullptr>", lnum);
   else  _printf_str(s, static_cast<std::string>(val), lnum);
