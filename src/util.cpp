@@ -320,7 +320,7 @@ std::string tdog::hostname()
   else return "localhost";
 }
 //---------------------------------------------------------------------------
-tdog::i64_t tdog::msec_time()
+tdog::i64_t tdog::msec_datetime()
 {
   // Returns the time in milliseconds from 1970.
   tdog::i64_t rslt = static_cast<tdog::i64_t>(std::time(0));
@@ -347,6 +347,43 @@ tdog::i64_t tdog::msec_time()
 #endif
 
   return rslt;
+}
+tdog::i64_t tdog::msec_timestamp()
+{
+#if defined(TDOG_WINDOWS)
+  LARGE_INTEGER counter, frequency;
+  ::QueryPerformanceCounter(&counter);
+  ::QueryPerformanceFrequency(&frequency);
+  frequency.QuadPart /= 1000;
+  return counter.QuadPart / frequency.QuadPart;
+#else
+  // Returns the time in milliseconds from 1970.
+  tdog::i64_t rslt = static_cast<tdog::i64_t>(std::time(0));
+  rslt *= 1000;
+
+
+  // Get the millisecond component
+#if defined(TDOG_WINDOWS)
+  SYSTEMTIME st;
+  st.wYear = 0;
+  st.wMilliseconds = 0;
+  GetSystemTime(&st);
+
+  if (st.wYear != 0)
+  {
+    rslt += st.wMilliseconds;
+  }
+#elif _POSIX_VERSION >= 200112L
+  timeval tv;
+  tv.tv_usec = 0;
+  if (gettimeofday(&tv, 0) == 0)
+  {
+    rslt += tv.tv_usec / 1000;
+  }
+#endif
+
+  return rslt;
+#endif
 }
 //---------------------------------------------------------------------------
 void tdog::msleep(int m)

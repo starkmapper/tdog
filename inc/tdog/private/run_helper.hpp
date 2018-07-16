@@ -63,7 +63,8 @@ class run_helper
   std::string m_error_name;
   int m_assert_cnt;
   int m_assert_fails;
-  tdog::i64_t m_start_time;
+  tdog::i64_t m_start_datetime;
+  tdog::i64_t m_start_timestamp;
   tdog::i64_t m_duration;
   tdog::i64_t m_time_limit;
   tdog::i64_t m_global_limit;
@@ -120,7 +121,7 @@ class run_helper
   std::string error_name() const;
   int assert_cnt() const;
   int fail_cnt() const;
-  tdog::i64_t start_time() const;
+  tdog::i64_t start_datetime() const;
   tdog::i64_t duration() const;
   bool has_ran() const;
   bool has_failed() const;

@@ -366,7 +366,7 @@ void html_reporter::gen_start(std::ostream& os)
 
   // Start time
   os << _indent() << "<strong>" << START_TIME_LEADER << "</strong>";
-  os << iso_time(owner().start_time()) << "<br/>\n";
+  os << iso_time(owner().start_datetime()) << "<br/>\n";
 
   os << _indent(-1) << "</p>\n";
 
@@ -599,7 +599,7 @@ void html_reporter::gen_test(std::ostream& os, const basic_test* tc)
     os << _indent() << _td_str(t_name) << "\n";
     os << _indent() << _td_str(xml_esc(helper.author())) << "\n";
     os << _indent() << _td_str(test_type_str(tc->test_type())) << "\n";
-    os << _indent() << _td_str(iso_time(helper.start_time())) << "\n";
+    os << _indent() << _td_str(iso_time(helper.start_datetime())) << "\n";
     os << _indent() << _td_str(duration_str(helper.duration())) << "\n";
 
     // Color pass/fail value
@@ -743,7 +743,7 @@ void html_reporter::gen_end(std::ostream& os)
   }
 
   os << _indent() << "<strong>" << END_TIME_LEADER << "</strong>";
-  os << iso_time(owner().end_time()) << "<br/>\n";
+  os << iso_time(owner().end_datetime()) << "<br/>\n";
 
   // Duration
   os << _indent() << "<strong>" << DURATION_LEADER << "</strong>";

@@ -157,7 +157,7 @@ void text_reporter::gen_start(std::ostream& os)
   os << PROJECT_PLATFORM_LEADER << TDOG_PLATOS << "\n";
 
   // Start time
-  os << START_TIME_LEADER << iso_time(owner().start_time()) << "\n";
+  os << START_TIME_LEADER << iso_time(owner().start_datetime()) << "\n";
 
   _write_txt_break(os);
   os << "\n";
@@ -296,7 +296,7 @@ void text_reporter::gen_test(std::ostream& os, const basic_test* tc)
     if (verbose())
     {
       // Write test case header (verbose only)
-      os << tn_str << TEST_STARTED_LEADER << iso_time(helper.start_time()) << "\n";
+      os << tn_str << TEST_STARTED_LEADER << iso_time(helper.start_datetime()) << "\n";
 
       // Write filename
       os << tn_str << FILENAME_LEADER << tc->file_location() << "\n";
@@ -397,7 +397,7 @@ void text_reporter::gen_end(std::ostream& os)
 
   _write_txt_break(os);
 
-  os << END_TIME_LEADER << iso_time(owner().end_time()) << "\n";
+  os << END_TIME_LEADER << iso_time(owner().end_datetime()) << "\n";
   os << DURATION_LEADER << duration_str(owner().duration()) << "\n";
   _write_txt_break(os);
   os << "\n";

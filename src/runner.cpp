@@ -309,8 +309,10 @@ void runner::clear(bool all)
   // We do not clear platos
   if (m_immutable) throw std::logic_error(IMMUTABLE_ERROR);
 
-  m_start_time = 0;
-  m_end_time = 0;
+  m_start_datetime = 0;
+  m_end_datetime = 0;
+  m_start_timestamp = 0;
+  m_end_timestamp = 0;
   m_run_rslt = RAN_NONE;
 
   if (all)
@@ -411,7 +413,7 @@ std::vector<std::string> runner::declaration_errors(bool lf) const
   // is running, or has been run. This means the test
   // registration phase has finished, and we can check
   // matching suite open/closure statements.
-  if (m_start_time > 0)
+  if (m_start_datetime > 0)
   {
     if (suite_manager::counter() > 0)
     {
@@ -565,7 +567,8 @@ int runner::run(const std::string& names, bool throw_declerr)
   clear(false);
 
   // Initialize timer
-  m_start_time = msec_time();
+  m_start_datetime = msec_datetime();
+  m_start_timestamp = msec_timestamp();
 
   try
   {
@@ -632,7 +635,8 @@ int runner::run(const std::string& names, bool throw_declerr)
     }
 
     // Mark end time
-    m_end_time = msec_time();
+    m_end_timestamp = msec_timestamp();
+    m_end_datetime = msec_datetime();
 
     // Write report footer
     reporter->gen_end(std::cout);
@@ -960,24 +964,24 @@ status_t runner::test_status(const std::string& name) const
   return TS_NOT_EXIST;
 }
 //---------------------------------------------------------------------------
-tdog::i64_t runner::start_time() const
+tdog::i64_t runner::start_datetime() const
 {
   // Returns the date/time when the test run was started.
-  return m_start_time;
+  return m_start_datetime;
 }
 //---------------------------------------------------------------------------
-tdog::i64_t runner::end_time() const
+tdog::i64_t runner::end_datetime() const
 {
   // Returns the date/time when the last test run completed.
-  return m_end_time;
+  return m_end_datetime;
 }
 //---------------------------------------------------------------------------
 tdog::i64_t runner::duration() const
 {
   // Returns the total duration of the test run in seconds.
-  if (m_start_time == 0) return -1;
-  else if (m_end_time == 0) return msec_time() - m_start_time;
-  return m_end_time - m_start_time;
+  if (m_start_timestamp == 0) return -1;
+  else if (m_end_timestamp == 0) return msec_timestamp() - m_start_timestamp;
+  return m_end_timestamp - m_start_timestamp;
 }
 //---------------------------------------------------------------------------
 

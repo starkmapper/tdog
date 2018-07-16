@@ -78,8 +78,10 @@ class runner
   std::string m_html_stylesheet;
   bool m_sorted;
   int m_text_report_break_width;
-  tdog::i64_t m_start_time;
-  tdog::i64_t m_end_time;
+  tdog::i64_t m_start_datetime;
+  tdog::i64_t m_end_datetime;
+  tdog::i64_t m_start_timestamp;
+  tdog::i64_t m_end_timestamp;
   bool m_has_suites;
   tdog::i64_t m_global_time_limit;
   tdog::i64_t m_global_time_warn;
@@ -1061,7 +1063,7 @@ std::vector<std::string> declaration_errors(bool lf = false) const;
  * \return Test run start time in ms since 1970
  * \sa end_time(), duration()
  */
-  tdog::i64_t start_time() const;
+  tdog::i64_t start_datetime() const;
 
 /**
  * \brief Returns the date/time when the last test run completed.
@@ -1071,7 +1073,7 @@ std::vector<std::string> declaration_errors(bool lf = false) const;
  * \return Test run end time in ms since 1970
  * \sa start_time(), duration()
  */
-  tdog::i64_t end_time() const;
+  tdog::i64_t end_datetime() const;
 
 /**
  * \brief Returns the total duration of the last test run in milli seconds.

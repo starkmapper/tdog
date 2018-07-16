@@ -104,7 +104,7 @@ void xml_reporter::_write_stats(std::string& ref, bool is_root)
       owner().statistic_count(CNT_DISABLED, "*")));
 
     // Total duration
-    tdog::i64_t dur = (owner().end_time() - owner().start_time()) / 1000;
+    tdog::i64_t dur = owner().duration() / 1000;
     ref = str_replace(ref, PFX + TIME_ATTRIB, int_to_str(dur));
   }
   else
@@ -261,7 +261,7 @@ void xml_reporter::gen_test(std::ostream&, const basic_test* tc)
       os << " " << SKIPPED_ATTRIB << "=\"$" << DISABLED_ATTRIB << "\"";
       os << " " << DISABLED_ATTRIB << "=\"$" << SKIPPED_ATTRIB << "\"";
       os << " " << TIME_ATTRIB << "=\"$" << TIME_ATTRIB << "\"";
-      os << " " << TIMESTAMP_ATTRIB << "=\"" << iso_time(helper.start_time()) << "\"";
+      os << " " << TIMESTAMP_ATTRIB << "=\"" << iso_time(helper.start_datetime()) << "\"";
       os << " " << HOSTNAME_ATTRIB << "=\"" << tdog::hostname() << "\"";
       os << ">\n";
     }

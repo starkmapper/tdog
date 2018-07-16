@@ -236,7 +236,8 @@ void run_helper::clear()
     m_status = TS_READY;
     m_assert_cnt = 0;
     m_assert_fails = 0;
-    m_start_time = 0;
+    m_start_datetime = 0;
+    m_start_timestamp = 0;
     m_duration = TDUR_NOT_RUN;
     m_time_exceeded = false;
     m_time_warn_flag = false;
@@ -260,7 +261,8 @@ bool run_helper::start_test(tdog::i64_t glimit, tdog::i64_t gwarn)
     m_global_limit = glimit;
     m_warning_limit = gwarn;
     m_duration = TDUR_RUNNING;
-    m_start_time = msec_time();
+    m_start_datetime = msec_datetime();
+    m_start_timestamp = msec_timestamp();
 
     return true;
   }
@@ -272,7 +274,7 @@ void run_helper::stop_test()
 {
   if (m_duration == TDUR_RUNNING)
   {
-    m_duration = msec_time() - m_start_time;
+    m_duration = msec_timestamp() - m_start_timestamp;
     check_time_limit(0);
   }
 }
@@ -301,17 +303,17 @@ int run_helper::fail_cnt() const
   return m_assert_fails;
 }
 //---------------------------------------------------------------------------
-tdog::i64_t run_helper::start_time() const
+tdog::i64_t run_helper::start_datetime() const
 {
   // Test start time
-  return m_start_time;
+  return m_start_datetime;
 }
 //---------------------------------------------------------------------------
 tdog::i64_t run_helper::duration() const
 {
   // Test duration in ms
   if (m_duration == TDUR_NOT_RUN) return 0;
-  if (m_duration == TDUR_RUNNING) return msec_time() - m_start_time;
+  if (m_duration == TDUR_RUNNING) return msec_timestamp() - m_start_timestamp;
 
   return m_duration;
 }
